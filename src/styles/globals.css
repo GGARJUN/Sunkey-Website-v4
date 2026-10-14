@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   V2 DESIGN TOKENS — 70% LIGHT / 30% DARK SYSTEM
+============================================================ */
+:root {
+  /* Dark palette (hero, CTA, footer, map) */
+  --bg:          #0D0F14;
+  --surface:     #1A1D24;
+  --border-card: #2A2E36;
+
+  /* Light palette (content sections) */
+  --light:       #FFFFFF;
+  --light-gray:  #F5F6F9;
+  --light-border:#E8E9EE;
+
+  /* Text on dark */
+  --text-primary:   #FFFFFF;
+  --text-secondary: #E5E7EB;
+  --text-muted:     #737C87;
+
+  /* Text on light */
+  --text-dark-heading: #0D0F14;
+  --text-dark-body:    #5A6072;
+  --text-dark-muted:   #9299A6;
+
+  /* Accent */
+  --accent:      #FF5A1F;
+  --accent-soft: rgba(255, 90, 31, 0.12);
+  --gradient:    linear-gradient(135deg, #FF5A1F 0%, #ec4040 100%);
+
+  /* Legacy */
+  --brand-red:    #ec4040;
+  --border-light: #e4e4e4;
+
+  /* Motion */
+  --ease-apple: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-entry: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   BASE
+============================================================ */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  /* Global: prevent hyphens on all headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    hyphens: none;
+    -webkit-hyphens: none;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  a      { text-decoration: none; color: inherit; }
+  button { font-family: 'Poppins', sans-serif; }
+  img    { max-width: 100%; display: block; }
+}
+
+/* ============================================================
+   COMPONENTS
+============================================================ */
+@layer components {
+
+  .section-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+  @media (max-width: 768px) {
+    .section-container { padding-left: 20px; padding-right: 20px; }
+  }
+
+  /* Section label — accent orange, works on both light + dark */
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Text helpers for light sections */
+  .heading-dark { color: var(--text-dark-heading); }
+  .body-dark     { color: var(--text-dark-body);    }
+  .muted-dark    { color: var(--text-dark-muted);   }
+
+  /* ── Dark card (on any background) ─────────────────── */
+  .card-v2 {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border-card);
+    padding: 24px;
+    cursor: pointer;
+    transition: border-color 250ms var(--ease-apple),
+                box-shadow    250ms var(--ease-apple),
+                transform     250ms var(--ease-apple);
+  }
+  .card-v2:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 32px rgba(255, 90, 31, 0.15);
+    transform: translateY(-6px);
+  }
+
+  /* ── Buttons ────────────────────────────────────────── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    border: none;
+    cursor: pointer;
+    padding: 14px 28px;
+    font-size: 0.9rem;
+    background: var(--gradient);
+    transition: opacity 250ms var(--ease-apple), transform 250ms var(--ease-apple);
+    font-family: 'Poppins', sans-serif;
+  }
+  .btn-primary:hover  { opacity: 0.88; transform: translateY(-1px); }
+  .btn-primary:active { transform: scale(0.98); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+    padding: 14px 28px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: border-color 250ms var(--ease-apple), background 250ms var(--ease-apple);
+    font-family: 'Poppins', sans-serif;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.04); }
+
+  /* Ghost on light bg */
+  .btn-ghost-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 14px 28px;
+    font-size: 0.9rem;
+    color: var(--text-dark-heading);
+    border: 1px solid var(--light-border);
+    transition: border-color 250ms var(--ease-apple), color 250ms var(--ease-apple);
+    font-family: 'Poppins', sans-serif;
+  }
+  .btn-ghost-light:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Filter pill (work page) ─────────────────────────── */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border: 1px solid var(--border-card);
+    color: var(--text-muted);
+    cursor: default;
+    transition: background 250ms var(--ease-apple), color 250ms var(--ease-apple), border-color 250ms var(--ease-apple);
+  }
+  .pill-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  /* ── Card tag (inside cards) ────────────────────────── */
+  .card-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.07);
+    color: rgba(255, 255, 255, 0.6);
+    transition: background 250ms var(--ease-apple), color 250ms var(--ease-apple);
+  }
+}
+
+/* ============================================================
+   UTILITIES
+============================================================ */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  @keyframes trace-pulse {
+    0%, 100% { opacity: 0.12; }
+    50%       { opacity: 0.35; }
+  }
+  .trace-animate { animation: trace-pulse 3s ease-in-out infinite; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
